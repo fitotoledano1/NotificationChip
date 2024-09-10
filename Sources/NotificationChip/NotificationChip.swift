@@ -54,7 +54,7 @@ struct NotificationChip: ViewModifier {
     }
 }
 
-extension View {
+public extension View {
     func notificationChip(
         title: String,
         symbolName: String,
