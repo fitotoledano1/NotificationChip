@@ -56,13 +56,14 @@ struct NotificationChip: ViewModifier {
 
 public extension View {
     func notificationChip(
+        isPresented: Binding<Bool>,
         title: String,
         symbolName: String,
         duration: Double
     ) -> some View {
         modifier(
             NotificationChip(
-                isPresented: .constant(true),
+                isPresented: isPresented,
                 title: title,
                 symbolName: symbolName,
                 duration: duration
@@ -74,6 +75,7 @@ public extension View {
 #Preview {
     Color.white
         .notificationChip(
+            isPresented: .constant(true),
             title: "Added to playlist",
             symbolName: "star.fill",
             duration: 1.33
