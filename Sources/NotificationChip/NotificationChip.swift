@@ -38,6 +38,12 @@ struct NotificationChip: ViewModifier {
         }
     }
     
+    func show(with duration: Double) {
+        withAnimation(.easeIn(duration: duration)) {
+            opacity = 1.0
+        }
+    }
+    
     /// Hides the NotificationChip over time.
     func hide(
         after delay: Double = 0.0,
