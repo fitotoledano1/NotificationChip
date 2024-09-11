@@ -10,32 +10,31 @@ struct NotificationChip: ViewModifier {
     @State private var opacity = 1.0
     
     func body(content: Content) -> some View {
-        if isPresented {
-            content
-                .overlay {
-                    HStack(spacing: 8) {
-                        Image(systemName: symbolName)
-                            .resizable()
-                            .frame(width: 16, height: 16)
-                        
-                        Text(title)
-                            .bold()
-                    }
-                    .padding(24)
-                    .background(.ultraThinMaterial)
-                    .clipShape(RoundedRectangle(cornerRadius: 8))
-                    .opacity(opacity)
-                    .onTapGesture {
-                        /// Hides it immediately when tapped.
-                        hide(after: 0)
-                    }
-                    .onAppear {
+        content
+            .overlay {
+                HStack(spacing: 8) {
+                    Image(systemName: symbolName)
+                        .resizable()
+                        .frame(width: 16, height: 16)
+                    
+                    Text(title)
+                        .bold()
+                }
+                .padding(24)
+                .background(.ultraThinMaterial)
+                .clipShape(RoundedRectangle(cornerRadius: 8))
+                .opacity(isPresented ? 1.0 : 0.0)
+                .onTapGesture {
+                    /// Hides it immediately when tapped.
+                    hide(after: 0)
+                }
+                .onAppear {
+                    defer {
                         hide(after: 1.33, during: 0.67)
                     }
+                    show(with: 0.33)
                 }
-        } else {
-            content
-        }
+            }
     }
     
     func show(with duration: Double) {
